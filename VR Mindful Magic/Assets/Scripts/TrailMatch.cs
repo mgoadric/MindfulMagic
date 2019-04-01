@@ -6,14 +6,12 @@ public class TrailMatch : MonoBehaviour {
 
     public GameObject toTrack;
     public GameObject origin;
-    private TrailRenderer tr;
     private Vector3 startPos;
     private Vector3 trStartPos;
     
     // Use this for initialization
     void Start () {
-        tr = toTrack.GetComponent<TrailRenderer>();
-        trStartPos = tr.transform.position;
+        trStartPos = toTrack.transform.position;
         startPos = transform.position;
     }
 
@@ -21,7 +19,7 @@ public class TrailMatch : MonoBehaviour {
     void Update () {
         Spherical3 sc = new Spherical3();
 
-        Vector3 where = tr.transform.position - origin.transform.position;
+        Vector3 where = toTrack.transform.position - origin.transform.position;
         SphereUtility.CartesianToSpherical(where, out sc);
 
         // reflecting
