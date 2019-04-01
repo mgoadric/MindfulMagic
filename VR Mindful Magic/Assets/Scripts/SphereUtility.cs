@@ -64,9 +64,9 @@ public class SphereUtility : MonoBehaviour {
         {
             SphericalToCartesian(source[i], out swhere);
             SphericalToCartesian(Mirror(match[i]), out mwhere);
-            //Debug.Log(swhere);
-            //Debug.Log(mwhere);
-            //Debug.Log(i + ": " + (swhere - mwhere).magnitude);
+            Debug.Log(swhere);
+            Debug.Log(mwhere);
+            Debug.Log(i + ": " + (swhere - mwhere).magnitude);
             total += (swhere - mwhere).magnitude;
         }
         return total / source.Length;

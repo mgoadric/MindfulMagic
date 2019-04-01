@@ -377,6 +377,7 @@ GameObject:
   - component: {fileID: 1040019451}
   - component: {fileID: 1040019452}
   - component: {fileID: 1040019453}
+  - component: {fileID: 1040019454}
   m_Layer: 0
   m_Name: RightMatch
   m_TagString: Untagged
@@ -507,6 +508,20 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &1040019454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040019450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cc0204c769a4c444a39eac561cf3140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  origin: {fileID: 660521830}
+  randomize: 0
 --- !u!1001 &1156922910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -574,9 +589,29 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8387228548822116909}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1307938345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1307938340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cc0204c769a4c444a39eac561cf3140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  origin: {fileID: 1481346606}
+  randomize: 0
 --- !u!1 &1314539984 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100080, guid: 02bb8e0404baac5459239d6d944a008b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1156922910}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1481346606 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: 02bb8e0404baac5459239d6d944a008b,
     type: 3}
   m_PrefabInstance: {fileID: 1156922910}
   m_PrefabAsset: {fileID: 0}
@@ -589,6 +624,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1545872746}
+  - component: {fileID: 1545872747}
   m_Layer: 0
   m_Name: Matching
   m_TagString: Untagged
@@ -613,6 +649,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1545872747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545872745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 151f44418569e6944bb18d5102662470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 1307938340}
+  match: {fileID: 2127961529}
 --- !u!1001 &1615360683
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -699,6 +749,7 @@ GameObject:
   - component: {fileID: 2127961530}
   - component: {fileID: 2127961531}
   - component: {fileID: 2127961532}
+  - component: {fileID: 2127961533}
   m_Layer: 0
   m_Name: LeftMatch
   m_TagString: Untagged
@@ -829,6 +880,20 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &2127961533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2127961529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cc0204c769a4c444a39eac561cf3140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  origin: {fileID: 1545872745}
+  randomize: 0
 --- !u!1001 &8387228548822116909
 PrefabInstance:
   m_ObjectHideFlags: 0
