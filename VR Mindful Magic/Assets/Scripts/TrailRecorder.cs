@@ -36,7 +36,7 @@ public class TrailRecorder : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown("space") || OVRInput.Get(OVRInput.Button.One))
+        if (Input.GetKeyDown("space") || OVRInput.GetDown(OVRInput.Button.One))
         {
             StartRecord();
               

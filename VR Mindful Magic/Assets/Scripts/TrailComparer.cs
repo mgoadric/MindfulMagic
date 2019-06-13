@@ -6,6 +6,7 @@ public class TrailComparer : MonoBehaviour {
 
     public GameObject source;
     public GameObject match;
+    public GameObject model;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +26,10 @@ public class TrailComparer : MonoBehaviour {
             Debug.Log("Comparing trails");
             float d = SphereUtility.Divergence(sourceTrail, matchTrail);
             Debug.Log("Divergence = " + d);
+        } else if (OVRInput.GetDown(OVRInput.Button.Three))
+        {
+            Debug.Log("Advancing to Next Animation");
+            model.GetComponent<Animator>().SetTrigger("next");
         }
     }
 }
