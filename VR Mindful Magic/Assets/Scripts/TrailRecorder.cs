@@ -36,10 +36,7 @@ public class TrailRecorder : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown("s"))
-        {
-            StopRecord();
-        }
+
     }
 
     IEnumerator Recording()

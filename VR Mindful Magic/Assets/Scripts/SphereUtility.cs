@@ -41,6 +41,16 @@ public class SphereUtility : MonoBehaviour {
         outCart.z = a * Mathf.Sin(sphereCoords.p);
     }
 
+    public static Vector3[] SphericaToCartesian(Spherical3[] sphereArray)
+    {
+        Vector3[] cartArray = new Vector3[sphereArray.Length];
+        for (int i = 0; i < sphereArray.Length; i++)
+        {
+            cartArray[i] = new Vector3();
+            SphericalToCartesian(sphereArray[i], out cartArray[i]);
+        }
+        return cartArray;
+    }
 
     public static void CartesianToSpherical(Vector3 cartCoords, out Spherical3 sphereCoords)
     {

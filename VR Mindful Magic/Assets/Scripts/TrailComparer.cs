@@ -11,6 +11,7 @@ public class TrailComparer : MonoBehaviour {
     public GameObject rightmatch;
     public GameObject model;
     public GameObject messages;
+    public GameObject linePrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -35,13 +36,39 @@ public class TrailComparer : MonoBehaviour {
             Debug.Log("Divergence = " + d);
 
             messages.GetComponent<TextMeshPro>().text = "Score: " + d;
-        } else if (OVRInput.GetDown(OVRInput.Button.Three))
+
+            Vector3[] sourceCarts = SphereUtility.SphericaToCartesian(sourceTrail);
+            GameObject go = Instantiate(linePrefab);
+            go.GetComponent<LineRenderer>().positionCount = sourceCarts.Length;
+            go.GetComponent<LineRenderer>().SetPositions(sourceCarts);
+
+        }
+        else if (OVRInput.GetDown(OVRInput.Button.Three))
         {
             Debug.Log("Advancing to Next Animation");
-            model.GetComponent<Animator>().SetTrigger("next");
-            messages.GetComponent<TextMeshPro>().text = "Recording..";
+            model.GetComponent<Animator>().SetTrigger("magic");
+            messages.GetComponent<TextMeshPro>().text = "Magic..";
             leftsource.GetComponent<TrailRecorder>().StartRecord();
             leftmatch.GetComponent<TrailRecorder>().StartRecord();
+
+        }
+        else if (OVRInput.GetDown(OVRInput.Button.Four))
+        {
+            Debug.Log("Advancing to Next Animation");
+            model.GetComponent<Animator>().SetTrigger("wheelbarrow");
+            messages.GetComponent<TextMeshPro>().text = "Wheelbarrow..";
+            leftsource.GetComponent<TrailRecorder>().StartRecord();
+            leftmatch.GetComponent<TrailRecorder>().StartRecord();
+
+        }
+        else if (OVRInput.GetDown(OVRInput.Button.Two))
+        {
+            Debug.Log("Advancing to Next Animation");
+            model.GetComponent<Animator>().SetTrigger("strong");
+            messages.GetComponent<TextMeshPro>().text = "JStrong..";
+            leftsource.GetComponent<TrailRecorder>().StartRecord();
+            leftmatch.GetComponent<TrailRecorder>().StartRecord();
+
         }
     }
 }

@@ -1172,6 +1172,8 @@ MonoBehaviour:
   rightmatch: {fileID: 494596165}
   model: {fileID: 1397239928}
   messages: {fileID: 763254732}
+  linePrefab: {fileID: 8939947306251032952, guid: e4e8699ddf5dbf24b89cf91834b8ec35,
+    type: 3}
 --- !u!1001 &1615360683
 PrefabInstance:
   m_ObjectHideFlags: 0
