@@ -424,6 +424,20 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1615360683}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &538299066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538299061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cc0204c769a4c444a39eac561cf3140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  origin: {fileID: 1481346606}
+  randomize: 0
 --- !u!1 &660521830
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,6 +1187,8 @@ MonoBehaviour:
   model: {fileID: 1397239928}
   messages: {fileID: 763254732}
   linePrefab: {fileID: 8939947306251032952, guid: e4e8699ddf5dbf24b89cf91834b8ec35,
+    type: 3}
+  lineMatchPrefab: {fileID: 8528590026277889235, guid: bffda7fbdf49fe04aaec58114a8a83c2,
     type: 3}
 --- !u!1001 &1615360683
 PrefabInstance:

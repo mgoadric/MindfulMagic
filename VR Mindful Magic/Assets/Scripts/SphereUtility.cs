@@ -52,6 +52,18 @@ public class SphereUtility : MonoBehaviour {
         return cartArray;
     }
 
+
+    public static Vector3[] SphericaToCartesianMirror(Spherical3[] sphereArray)
+    {
+        Vector3[] cartArray = new Vector3[sphereArray.Length];
+        for (int i = 0; i < sphereArray.Length; i++)
+        {
+            cartArray[i] = new Vector3();
+            SphericalToCartesian(Mirror(sphereArray[i]), out cartArray[i]);
+        }
+        return cartArray;
+    }
+
     public static void CartesianToSpherical(Vector3 cartCoords, out Spherical3 sphereCoords)
     {
         if (cartCoords.x == 0)
@@ -72,11 +84,11 @@ public class SphereUtility : MonoBehaviour {
         float total = 0.0f;
         for (int i = 0; i < source.Length; i++)
         {
-            SphericalToCartesian(source[i], out swhere);
-            SphericalToCartesian(Mirror(match[i]), out mwhere);
+            SphericalToCartesian(Mirror(source[i]), out swhere);
+            SphericalToCartesian(match[i], out mwhere);
             Debug.Log(swhere);
             Debug.Log(mwhere);
-            Debug.DrawLine(swhere, mwhere, Color.white, 5);
+            // Debug.DrawLine(swhere, mwhere, Color.white, 5);
             Debug.Log(i + ": " + (swhere - mwhere).magnitude);
             total += (swhere - mwhere).magnitude;
         }

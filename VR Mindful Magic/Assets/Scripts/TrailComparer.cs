@@ -12,11 +12,17 @@ public class TrailComparer : MonoBehaviour {
     public GameObject model;
     public GameObject messages;
     public GameObject linePrefab;
+    private GameObject go;
+    public GameObject lineMatchPrefab;
+    private GameObject go2;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+
+
+    // Use this for initialization
+    void Start () {
+        go = Instantiate(linePrefab);
+        go2 = Instantiate(lineMatchPrefab);
+    }
 
     // Update is called once per frame
     void Update()
@@ -25,8 +31,10 @@ public class TrailComparer : MonoBehaviour {
         {
             leftsource.GetComponent<TrailRecorder>().StopRecord();
             leftmatch.GetComponent<TrailRecorder>().StopRecord();
+            rightsource.GetComponent<TrailRecorder>().StopRecord();
+            rightmatch.GetComponent<TrailRecorder>().StopRecord();
 
-            TrailRecorder str = leftsource.GetComponent<TrailRecorder>();
+            TrailRecorder str = rightsource.GetComponent<TrailRecorder>();
             Spherical3[] sourceTrail = str.mytrail.ToArray();
             TrailRecorder mtr = leftmatch.GetComponent<TrailRecorder>();
             Spherical3[] matchTrail = mtr.mytrail.ToArray();
@@ -37,10 +45,13 @@ public class TrailComparer : MonoBehaviour {
 
             messages.GetComponent<TextMeshPro>().text = "Score: " + d;
 
-            Vector3[] sourceCarts = SphereUtility.SphericaToCartesian(sourceTrail);
-            GameObject go = Instantiate(linePrefab);
+            Vector3[] sourceCarts = SphereUtility.SphericaToCartesianMirror(sourceTrail);
             go.GetComponent<LineRenderer>().positionCount = sourceCarts.Length;
             go.GetComponent<LineRenderer>().SetPositions(sourceCarts);
+
+            Vector3[] matchCarts = SphereUtility.SphericaToCartesian(matchTrail);
+            go2.GetComponent<LineRenderer>().positionCount = matchCarts.Length;
+            go2.GetComponent<LineRenderer>().SetPositions(matchCarts);
 
         }
         else if (OVRInput.GetDown(OVRInput.Button.Three))
@@ -50,6 +61,8 @@ public class TrailComparer : MonoBehaviour {
             messages.GetComponent<TextMeshPro>().text = "Magic..";
             leftsource.GetComponent<TrailRecorder>().StartRecord();
             leftmatch.GetComponent<TrailRecorder>().StartRecord();
+            rightsource.GetComponent<TrailRecorder>().StartRecord();
+            rightmatch.GetComponent<TrailRecorder>().StartRecord();
 
         }
         else if (OVRInput.GetDown(OVRInput.Button.Four))
@@ -59,6 +72,8 @@ public class TrailComparer : MonoBehaviour {
             messages.GetComponent<TextMeshPro>().text = "Wheelbarrow..";
             leftsource.GetComponent<TrailRecorder>().StartRecord();
             leftmatch.GetComponent<TrailRecorder>().StartRecord();
+            rightsource.GetComponent<TrailRecorder>().StartRecord();
+            rightmatch.GetComponent<TrailRecorder>().StartRecord();
 
         }
         else if (OVRInput.GetDown(OVRInput.Button.Two))
@@ -68,6 +83,8 @@ public class TrailComparer : MonoBehaviour {
             messages.GetComponent<TextMeshPro>().text = "JStrong..";
             leftsource.GetComponent<TrailRecorder>().StartRecord();
             leftmatch.GetComponent<TrailRecorder>().StartRecord();
+            rightsource.GetComponent<TrailRecorder>().StartRecord();
+            rightmatch.GetComponent<TrailRecorder>().StartRecord();
 
         }
     }
