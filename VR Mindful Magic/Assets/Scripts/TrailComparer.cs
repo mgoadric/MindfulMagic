@@ -16,19 +16,40 @@ public class TrailComparer : MonoBehaviour {
     public GameObject lineMatchPrefab;
     private GameObject go2;
 
+    private bool motion;
+    private bool notidle;
 
+    IEnumerator StartMotion()
+    {
+        yield return new WaitForSeconds(0.11f);
+        leftsource.GetComponent<TrailRecorder>().StartRecord();
+        leftmatch.GetComponent<TrailRecorder>().StartRecord();
+        rightsource.GetComponent<TrailRecorder>().StartRecord();
+        rightmatch.GetComponent<TrailRecorder>().StartRecord();
+        motion = true;
+    }
 
     // Use this for initialization
     void Start () {
         go = Instantiate(linePrefab);
         go2 = Instantiate(lineMatchPrefab);
+        motion = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.One))
+        //foreach (string s in new string[]{ "Idling", "Magic", "Victory", "Open", "Wheelbarrow", "Strong"})
+        //{
+        //    if (model.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(s))
+        //    {
+        //        messages.GetComponent<TextMeshPro>().text = motion + ":" + s;
+        //    }
+        //}
+
+        if (motion && model.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Idling"))
         {
+            motion = false;
             leftsource.GetComponent<TrailRecorder>().StopRecord();
             leftmatch.GetComponent<TrailRecorder>().StopRecord();
             rightsource.GetComponent<TrailRecorder>().StopRecord();
@@ -39,11 +60,20 @@ public class TrailComparer : MonoBehaviour {
             TrailRecorder mtr = leftmatch.GetComponent<TrailRecorder>();
             Spherical3[] matchTrail = mtr.mytrail.ToArray();
 
-            Debug.Log("Comparing trails");
+            Debug.Log("Comparing left trails");
             float d = SphereUtility.Divergence(sourceTrail, matchTrail);
+
+            str = leftsource.GetComponent<TrailRecorder>();
+            sourceTrail = str.mytrail.ToArray();
+            mtr = rightmatch.GetComponent<TrailRecorder>();
+            matchTrail = mtr.mytrail.ToArray();
+
+            Debug.Log("Comparing right trails");
+            d += SphereUtility.Divergence(sourceTrail, matchTrail);
+            d /= 2;
             Debug.Log("Divergence = " + d);
 
-            messages.GetComponent<TextMeshPro>().text = "Score: " + d;
+            messages.GetComponent<TextMeshPro>().text = "Score: " + (1 - Mathf.Min(d, 1));
 
             Vector3[] sourceCarts = SphereUtility.SphericaToCartesianMirror(sourceTrail);
             go.GetComponent<LineRenderer>().positionCount = sourceCarts.Length;
@@ -54,38 +84,34 @@ public class TrailComparer : MonoBehaviour {
             go2.GetComponent<LineRenderer>().SetPositions(matchCarts);
 
         }
-        else if (OVRInput.GetDown(OVRInput.Button.Three))
+        else if (OVRInput.GetDown(OVRInput.Button.Any))
         {
             Debug.Log("Advancing to Next Animation");
-            model.GetComponent<Animator>().SetTrigger("magic");
-            messages.GetComponent<TextMeshPro>().text = "Magic..";
-            leftsource.GetComponent<TrailRecorder>().StartRecord();
-            leftmatch.GetComponent<TrailRecorder>().StartRecord();
-            rightsource.GetComponent<TrailRecorder>().StartRecord();
-            rightmatch.GetComponent<TrailRecorder>().StartRecord();
 
-        }
-        else if (OVRInput.GetDown(OVRInput.Button.Four))
-        {
-            Debug.Log("Advancing to Next Animation");
-            model.GetComponent<Animator>().SetTrigger("wheelbarrow");
-            messages.GetComponent<TextMeshPro>().text = "Wheelbarrow..";
-            leftsource.GetComponent<TrailRecorder>().StartRecord();
-            leftmatch.GetComponent<TrailRecorder>().StartRecord();
-            rightsource.GetComponent<TrailRecorder>().StartRecord();
-            rightmatch.GetComponent<TrailRecorder>().StartRecord();
-
-        }
-        else if (OVRInput.GetDown(OVRInput.Button.Two))
-        {
-            Debug.Log("Advancing to Next Animation");
-            model.GetComponent<Animator>().SetTrigger("strong");
-            messages.GetComponent<TextMeshPro>().text = "JStrong..";
-            leftsource.GetComponent<TrailRecorder>().StartRecord();
-            leftmatch.GetComponent<TrailRecorder>().StartRecord();
-            rightsource.GetComponent<TrailRecorder>().StartRecord();
-            rightmatch.GetComponent<TrailRecorder>().StartRecord();
-
+            if (OVRInput.GetDown(OVRInput.Button.One))
+            {
+                model.GetComponent<Animator>().SetTrigger("victory");
+                StartCoroutine(StartMotion());
+                messages.GetComponent<TextMeshPro>().text = "Victory..";
+            }
+            else if (OVRInput.GetDown(OVRInput.Button.Two))
+            {
+                model.GetComponent<Animator>().SetTrigger("wheelbarrow");
+                StartCoroutine(StartMotion());
+                messages.GetComponent<TextMeshPro>().text = "Wheelbarrow..";
+            }
+            else if (OVRInput.GetDown(OVRInput.Button.Three))
+            {
+                model.GetComponent<Animator>().SetTrigger("strong");
+                StartCoroutine(StartMotion());
+                messages.GetComponent<TextMeshPro>().text = "Strong..";
+            }
+            else if (OVRInput.GetDown(OVRInput.Button.Four))
+            {
+                model.GetComponent<Animator>().SetTrigger("lift");
+                StartCoroutine(StartMotion());
+                messages.GetComponent<TextMeshPro>().text = "Lift..";
+            }
         }
     }
 }
